@@ -1,6 +1,6 @@
 package com.lihy.practiced.twentytwentyone;
 
-import com.lihy.practiced.twentytwentyone.bean.ListNode;
+import com.lihy.practiced.bean.ListNode;
 
 /**
  * 一月每日一题

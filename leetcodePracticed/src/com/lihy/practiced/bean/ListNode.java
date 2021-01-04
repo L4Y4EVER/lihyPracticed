@@ -1,4 +1,4 @@
-package com.lihy.practiced.twentytwentyone.bean;
+package com.lihy.practiced.bean;
 
 /**
  * @author lhy
