@@ -32,7 +32,7 @@ public class JanuaryPracticed {
     public List<List<Integer>> largeGroupPositions(String s) {
         List<List<Integer>> lists = new ArrayList<>();
         int n = s.length();
-        int num = 0;
+        int num = 1;
         for (int i = 0; i < n; i++){
             if (i == n - 1 || s.charAt(i) != s.charAt(i + 1)) {
                 if (num >= 3) {
