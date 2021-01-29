@@ -2,6 +2,9 @@ package com.lihy.practiced.twentytwentyone;
 
 import com.lihy.practiced.bean.ListNode;
 
+import java.util.Arrays;
+import java.util.PriorityQueue;
+
 /**
  * 一月每日一题
  *
@@ -9,6 +12,21 @@ import com.lihy.practiced.bean.ListNode;
  * @date 2021/1/3
  */
 public class JanuaryPracticed {
+
+    public int maxProfit(int[] prices) {
+
+        int minprice = Integer.MAX_VALUE;
+        int maxprofit = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minprice) {
+                minprice = prices[i];
+            } else if (prices[i] - minprice > maxprofit) {
+                maxprofit = prices[i] - minprice;
+            }
+        }
+        return maxprofit;
+    }
+
 
     /**
      * 0104
