@@ -16,13 +16,119 @@ import com.lihy.practiced.bean.ListNode;
  * 两个链表数 顺序相加
  *
  *
+ * 删除重复的元素2
+ *
+ * 合并两个有序的链表
+ *
+ * 25 题
+ *
+ * 147 实现插入排序
+ * 148 sortList 归并排序
+ *
+ * 向右旋转k位
+ *
+ * reorder list 如何快速获取到 中间位置
+ *
+ * palindrome linked list  判断链表是否为 回文
+ *
+ *
  * @author hongyan
  * @date 2021/2/1
  */
 public class LinkedListPractice {
 
 
+    /**
+     *
+     * 删除倒数第几个元素
+     *
+     * @param head
+     * @param n
+     * @return
+     */
+    public ListNode removeNode(ListNode head,int n){
+        if (head == null || n <= 0){
+            return head;
+        }
 
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;
+
+        ListNode p = dummyHead;
+        for (int i = 0; i < n ; i++){
+            p = p.next;
+        }
+
+        ListNode q = dummyHead;
+        while(p != null){
+            p = p.next;
+            q = q.next;
+        }
+
+        ListNode next = q.next;
+
+        q.next = q.next.next;
+        next.next = null;
+
+        return dummyHead.next;
+
+    }
+
+
+    /**
+     * 删除给定节点
+     *
+     * @param head
+     * @return
+     */
+    public ListNode deleteNode(ListNode head){
+        if (head == null){
+            return head;
+        }
+        if (head.next == null){
+            return null;
+        }
+
+        ListNode next = head.next;
+        head.val = next.val;
+        head.next = next.next;
+
+        next.next = null;
+
+        return head;
+
+    }
+
+
+
+    /**
+     * 将两个相邻的节点进行交换。
+     *
+     * @param head
+     * @return
+     */
+    public ListNode swapPairs(ListNode head){
+        if(head == null){
+            return head;
+        }
+
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;
+
+        ListNode p = dummyHead;
+        while (p.next !=null && p.next.next != null){
+            ListNode next = p.next;
+            ListNode nextNext = p.next.next;
+            ListNode next3 = p.next.next.next;
+
+            p.next = nextNext;
+            nextNext.next = next;
+            next.next = next3;
+            p = next;
+        }
+
+        return dummyHead.next;
+    }
 
 
 
