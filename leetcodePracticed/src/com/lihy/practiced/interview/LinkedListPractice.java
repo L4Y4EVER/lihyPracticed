@@ -5,6 +5,17 @@ import com.lihy.practiced.bean.ListNode;
 /**
  * 算法面试视频中的课程练习。
  *
+ * 有序链表删除重复节点
+ *
+ * partition 操作链表，给定一个节点，确定其在链表中的位置
+ *
+ * 奇数位置排在偶数前面
+ *
+ * 两个链表数 逆序相加
+ *
+ * 两个链表数 顺序相加
+ *
+ *
  * @author hongyan
  * @date 2021/2/1
  */
@@ -13,6 +24,14 @@ public class LinkedListPractice {
 
 
 
+
+
+    /**
+     * 递归的实现翻转链表
+     *
+     * @param head 头
+     * @return 结果
+     */
     public ListNode reverseLinkedList(ListNode head){
         if (head == null || head.next == null ){
             return head;
@@ -26,6 +45,12 @@ public class LinkedListPractice {
         return nextNode;
     }
 
+    /**
+     * 遍历的方式处理链表
+     *
+     * @param head
+     * @return
+     */
     public ListNode reverseList(ListNode head){
         if (head == null){
             return head;
