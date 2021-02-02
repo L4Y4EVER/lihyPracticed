@@ -15,29 +15,22 @@ public class ArrayPractice {
 
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         int[] arrays = new int[m];
-        System.arraycopy(arrays,0,nums1,0,m);
+        System.arraycopy(nums1,0,arrays,0,m);
 
         int p = 0;
         int p1 = 0;
         int p2 = 0;
 
         while (p1 < m && p2 <n){
-            if (arrays[p1] < nums2[p2]){
-                nums1[p++] = arrays[p1++];
-            }else if (arrays[p1] > nums2[p2]){
-                nums1[p++] = nums2[p2++];
-            }else {
-                nums1[p++] = arrays[p1++];
-                nums1[p++] = nums2[p2++];
-            }
+            nums1[p++] = arrays[p1] < nums2[p2] ? arrays[p1++] : nums2[p2++];
         }
 
         if (p1 < m){
-            System.arraycopy(nums1,p1 + n, arrays,p1,m);
+            System.arraycopy(arrays,p1, nums1,p1 + p2, m + n - p1 - p2);
         }
 
         if (p2 < n){
-            System.arraycopy(nums1,p2 + m, nums2,p2,n);
+            System.arraycopy(nums2,p2, nums1,p1 + p2,m+n -p1 -p2);
         }
     }
 }
