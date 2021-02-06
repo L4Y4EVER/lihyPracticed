@@ -6,6 +6,36 @@ package com.lihy.practiced.twentytwentyone;
  */
 public class FebruaryPracticed {
 
+
+    public int knapsack01DP(int[] w,int[] v,int c){
+        int n = w.length;
+        int p = v.length;
+        if (n != p){
+            return 0;
+        }
+        if (n == 0){
+            return n;
+        }
+        memoSpace = new int[n][c+1];
+
+        for (int j = 0;j <=c; j++){
+            memoSpace[0][j] = (j >= w[0]? v[0] : 0);
+        }
+
+
+        for (int i= 1; 1< n; i++){
+            for (int j=0;j<=c;j++){
+                memoSpace[i][j] = memoSpace[i-1][j];
+                if (j >= w[i]){
+                    memoSpace[i][j] = Math.max(memoSpace[i][j],v[i] + memoSpace[i-1][j-w[i]]);
+                }
+            }
+        }
+
+        return memoSpace[n-1][c];
+    }
+
+
     int[][] memoSpace;
 
     public int knapsack01(int[] w,int[] v,int c){
