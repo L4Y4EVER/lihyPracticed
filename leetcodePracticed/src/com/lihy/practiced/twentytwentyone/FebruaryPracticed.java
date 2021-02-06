@@ -6,6 +6,31 @@ package com.lihy.practiced.twentytwentyone;
  */
 public class FebruaryPracticed {
 
+    int[][] memoSpace;
+
+    public int knapsack01(int[] w,int[] v,int c){
+        int n = w.length;
+        memoSpace = new int[n][c+1];
+        return bestValue(w,v,n-1,c);
+    }
+
+    private int bestValue(int[] w, int[] v, int index, int c) {
+        if (index < 0|| c <= 0){
+            return 0;
+        }
+
+        if (memoSpace[index][c] != 0){
+            return memoSpace[index][c];
+        }
+        int res = bestValue(w,v,index -1,c);
+        if (c >= w[index]){
+            res = Math.max(res,v[index] + bestValue(w,v,index - 1,c-w[index]));
+        }
+        memoSpace[index][c] = res;
+
+        return res;
+    }
+
 
     public int robDP(int[] nums){
         int n = nums.length;
