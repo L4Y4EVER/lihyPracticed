@@ -6,6 +6,51 @@ package com.lihy.practiced.twentytwentyone;
  */
 public class FebruaryPracticed {
 
+
+    public int robDP(int[] nums){
+        int n = nums.length;
+        if (n == 0 ){
+            return 0;
+        }
+        int[] memos = new int[n];
+
+        memos[n-1] = nums[n-1];
+        for (int i = n-2; i >=0 ; i--){
+            for (int j = i; j < n; j++){
+                memos[i] = Math.max(memos[i],nums[j] + (j+2 < n ?nums[j+2]:0));
+            }
+        }
+
+
+        return memos[0];
+    }
+
+
+    // 问题的状态是什么，状态转移是什么？
+
+    public int rob(int[] nums){
+        memo = new int[nums.length + 1];
+        return tryRob(nums,0);
+    }
+
+
+    private int tryRob(int[] nums, int index) {
+        if (index >= nums.length){
+            return 0;
+        }
+        if (memo[index] != 0)
+            return memo[index];
+
+        int res = 0;
+        for (int i = index; i < nums.length; i++ ){
+            res = Math.max(res ,nums[i] + tryRob(nums,i+2));
+        }
+        memo[index] = res;
+
+        return res;
+    }
+
+
     private int[] memo;
 
     /**
