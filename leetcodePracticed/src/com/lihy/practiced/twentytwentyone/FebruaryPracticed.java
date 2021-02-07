@@ -7,9 +7,96 @@ package com.lihy.practiced.twentytwentyone;
 public class FebruaryPracticed {
 
 
+    /**
+     * 将问题转化成背包问题，进行实际解答
+     *
+     * @param nums
+     * @return
+     */
+    public boolean canPartition(int[] nums) {
+        int sum = 0;
+
+        // 一次循环获取到 集合的和
+        for (int num : nums) {
+            if (num < 0) {
+                return false;
+            }
+            sum += num;
+        }
+
+        // 判断和是否能被2 整除，不能则不能分割
+        if (sum % 2 != 0){
+            return false;
+        }
+
+        int n = nums.length;
+        int c = sum / 2;
+
+        boolean[] memos = new boolean[c +1];
+
+        for (int i =0; i<=c;i++){
+            memos[i] = (nums[0] == i);
+        }
+
+        for (int i =1; i< n; i++){
+            for (int j = c; j>= nums[i]; j--){
+                memos[j] = memos[j] || memos[j - nums[i]];
+            }
+        }
+
+        return memos[c];
+
+
+    }
+
 
     /**
-     * 因为每次只考虑上一层的 空间，所以只用两层空间就够了，。
+     *
+     *
+     * @param nums
+     * @return
+     */
+    public boolean canPartitionB(int[] nums) {
+        int sum = 0;
+
+        // 一次循环获取到 集合的和
+        for (int num : nums) {
+            if (num < 0) {
+                return false;
+            }
+            sum += num;
+        }
+
+        // 判断和是否能被2 整除，不能则不能分割
+        if (sum % 2 != 0){
+            return false;
+        }
+        // 记忆化搜索  0 未计算 1 计算正确 2 计算错误
+        memoSpace = new int[nums.length][sum/2 +1];
+        return tryPartition(nums,nums.length - 1,sum/2);
+
+
+    }
+
+    private boolean tryPartition(int[] nums, int index, int c) {
+        if (c == 0){
+            return true;
+        }
+        if (index < 0 || c < 0){
+            return false;
+        }
+
+        if (memoSpace[index][c] != 0){
+            return memoSpace[index][c] == 1;
+        }
+        memoSpace[index][c] = tryPartition(nums,index -1,c) || tryPartition(nums,index -1, c-nums[index]) ? 1 : 2;
+
+        return memoSpace[index][c] == 1;
+    }
+
+
+    /**
+     * 因为每次考虑前一个数，然后就用一维 搞。
      *
      * @param w
      * @param v
