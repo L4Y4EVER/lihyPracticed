@@ -7,6 +7,81 @@ package com.lihy.practiced.twentytwentyone;
 public class FebruaryPracticed {
 
 
+
+    /**
+     * 因为每次只考虑上一层的 空间，所以只用两层空间就够了，。
+     *
+     * @param w
+     * @param v
+     * @param c
+     * @return
+     */
+    public int knapsack01DPUpPlus(int[] w,int[] v,int c){
+        int n = w.length;
+        int p = v.length;
+        if (n != p){
+            return 0;
+        }
+        if (n == 0){
+            return n;
+        }
+        int[] memo = new int[c+1];
+
+        for (int j = 0;j <=c; j++){
+            memo[j] = (j >= w[0]? v[0] : 0);
+        }
+
+
+        for (int i= 1; 1< n; i++){
+            for (int j=c;j >= w[i];j--){
+                memoSpace[i%2][j] = memoSpace[(i-1)%2][j];
+                if (j >= w[i]){
+                    memo[j] = Math.max(memo[j],v[i] + memo[j-w[i]]);
+                }
+            }
+        }
+
+        return memo[c];
+    }
+
+
+    /**
+     * 因为每次只考虑上一层的 空间，所以只用两层空间就够了，。
+     *
+     * @param w
+     * @param v
+     * @param c
+     * @return
+     */
+    public int knapsack01DPUp(int[] w,int[] v,int c){
+        int n = w.length;
+        int p = v.length;
+        if (n != p){
+            return 0;
+        }
+        if (n == 0){
+            return n;
+        }
+        memoSpace = new int[2][c+1];
+
+        for (int j = 0;j <=c; j++){
+            memoSpace[0][j] = (j >= w[0]? v[0] : 0);
+        }
+
+
+        for (int i= 1; 1< n; i++){
+            for (int j=0;j<=c;j++){
+                memoSpace[i%2][j] = memoSpace[(i-1)%2][j];
+                if (j >= w[i]){
+                    memoSpace[i%2][j] = Math.max(memoSpace[i%2][j],v[i] + memoSpace[(i-1)%2][j-w[i]]);
+                }
+            }
+        }
+
+        return memoSpace[n-1][c];
+    }
+
+
     public int knapsack01DP(int[] w,int[] v,int c){
         int n = w.length;
         int p = v.length;
