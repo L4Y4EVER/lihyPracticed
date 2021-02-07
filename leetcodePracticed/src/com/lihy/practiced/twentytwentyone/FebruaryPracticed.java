@@ -8,6 +8,38 @@ public class FebruaryPracticed {
 
 
     /**
+     * 376
+     *
+     * @param nums
+     * @return
+     */
+    public int lengthOfLIS(int[] nums) {
+        if (nums.length == 0){
+            return 0;
+        }
+
+        int[] memos = new int[nums.length];
+        for (int i = 0; i < nums.length; i++)
+            memos[i] = 1;
+
+        for (int i = 1; i < nums.length; i ++){
+            for (int j=0; j < i; j++){
+                if (nums[j] < nums[i]){
+                    memos[i] = Math.max(memos[i],1+ memos[j]);
+                }
+            }
+        }
+
+        int res = 1;
+        for (int i = 0; i< nums.length; i ++ ){
+            res = Math.max(res,memos[i]);
+        }
+
+        return res;
+    }
+
+
+    /**
      * 将问题转化成背包问题，进行实际解答
      *
      * 322
