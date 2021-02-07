@@ -10,6 +10,11 @@ public class FebruaryPracticed {
     /**
      * 将问题转化成背包问题，进行实际解答
      *
+     * 322
+     * 377
+     * 474
+     * 139
+     * 494
      * @param nums
      * @return
      */
