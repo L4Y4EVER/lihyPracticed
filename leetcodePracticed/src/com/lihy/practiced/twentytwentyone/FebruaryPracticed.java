@@ -1,10 +1,76 @@
 package com.lihy.practiced.twentytwentyone;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 /**
  * @author lhy
  * @date 2021/2/6
  */
 public class FebruaryPracticed {
+
+
+    public static void main(String[] args) {
+
+
+
+    }
+
+    public  static void printCharNum(){
+        Scanner in = new Scanner(System.in);
+        String content  = in.nextLine().toLowerCase();
+        String value = in.nextLine().toLowerCase();
+
+//        Map<Character,Integer> map = new HashMap<>(16);
+//
+        int length = content.length();
+//        for (int i = 0; i < length; i++){
+//            char c = content.charAt(i);
+//            if (map.containsKey(c)){
+//                Integer integer = map.get(c);
+//                map.put(c,++integer);
+//            }else {
+//                map.put(c,1);
+//            }
+//        }
+
+        int num = 0;
+        for (int i = 0; i < length; i++){
+            if (String.valueOf(content.charAt(i)).equalsIgnoreCase(value)){
+                num ++;
+            }
+        }
+
+
+
+        System.out.println(num);
+
+
+    }
+
+
+    public static void printLastWordLength(){
+
+        Scanner in = new Scanner(System.in);
+
+        String content  = in.nextLine();;
+//        String[] contents = content.split(" ");
+//        int size = contents.length;
+//        int length = contents[size - 1].length();
+
+        int strL = content.length();
+        int length = 0;
+        for (int i = strL - 1; i >= 0; i --){
+            if (content.charAt(i) == ' '){
+                break;
+            }
+            length ++;
+        }
+
+
+        System.out.println(length);
+    }
 
 
     /**
