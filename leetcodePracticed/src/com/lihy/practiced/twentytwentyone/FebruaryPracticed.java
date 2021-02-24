@@ -15,6 +15,10 @@ public class FebruaryPracticed {
 
     public static void main(String[] args) {
 
+
+    }
+
+    private static void reListNode(){
         ListNode head = new ListNode(1);
         ListNode node1 = new ListNode(2);
         ListNode node2 = new ListNode(3);
