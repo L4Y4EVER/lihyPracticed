@@ -14,9 +14,66 @@ public class FebruaryPracticed {
 
 
     public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        // 注意 hasNext 和 hasNextLine 的区别
+        while (in.hasNext()) { // 注意 while 处理多个 case
+            String str = in.next();
+            removeChar(str);
+
+
+        }
+    }
+
+    private static void removeChar(String str) {
+        Map<Character,Integer> map = new HashMap<>(16);
+        int length = str.length();
+        for (int i = 0; i < length; i++){
+            char c = str.charAt(i);
+            if (map.containsKey(c)){
+                Integer integer = map.get(c);
+                map.put(c,++integer);
+            }else {
+                map.put(c,1);
+            }
+        }
+
+        int min = length;
+        for (Integer value : map.values()) {
+            min = Math.min(value,min);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++){
+            char c = str.charAt(i);
+            if (map.get(c) == min){
+                continue;
+            }
+            sb.append(c);
+        }
+
+        System.out.println(sb.toString());
 
 
     }
+
+    private static void drinkAeratedWater(int a) {
+        if (a == 0){
+            return;
+        }
+        int sum = 0;
+        int yu = 0;
+        while (a  >= 3){
+            yu = a % 3;
+            sum += a / 3;
+            a = a / 3 + yu;
+        }
+        if ( a == 2){
+            sum ++;
+        }
+
+        System.out.println( sum);
+    }
+
 
     private static void reListNode(){
         ListNode head = new ListNode(1);
@@ -61,18 +118,18 @@ public class FebruaryPracticed {
         String content  = in.nextLine().toLowerCase();
         String value = in.nextLine().toLowerCase();
 
-//        Map<Character,Integer> map = new HashMap<>(16);
-//
+        Map<Character,Integer> map = new HashMap<>(16);
+
         int length = content.length();
-//        for (int i = 0; i < length; i++){
-//            char c = content.charAt(i);
-//            if (map.containsKey(c)){
-//                Integer integer = map.get(c);
-//                map.put(c,++integer);
-//            }else {
-//                map.put(c,1);
-//            }
-//        }
+        for (int i = 0; i < length; i++){
+            char c = content.charAt(i);
+            if (map.containsKey(c)){
+                Integer integer = map.get(c);
+                map.put(c,++integer);
+            }else {
+                map.put(c,1);
+            }
+        }
 
         int num = 0;
         for (int i = 0; i < length; i++){
