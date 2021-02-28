@@ -24,6 +24,29 @@ public class FebruaryPracticed {
         }
     }
 
+    public boolean isMonotonic(int[] A) {
+
+        for (int i= 1;i < A.length; i++){
+            int compare = 0;
+            if (A[i] > A[i - 1] ){
+                for (int j = i + 1; j < A.length; j++){
+                    if (!(A[j] >= A[j - 1])){
+                        return false;
+                    }
+                }
+            }else if (A[i] < A[i - 1]){
+                for (int j = i + 1; j < A.length; j++){
+                    if (!(A[j] <= A[j - 1])){
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+
     private static void removeChar(String str) {
         Map<Character,Integer> map = new HashMap<>(16);
         int length = str.length();
