@@ -1,14 +1,159 @@
 package com.lihy.practiced.twentytwentyone;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class NiuClass {
 
 
 
+    public static void jiami(){
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String s1 = sc.nextLine().toUpperCase();
+            String s2 = sc.nextLine();
+            char[] chars1 = s1.toCharArray();
+            char[] chars2 = s2.toCharArray();
+            LinkedHashSet<Character> set = new LinkedHashSet();
+            for (int i = 0; i < chars1.length; i++) {
+                set.add(chars1[i]);
+            }
+            int k = 0;
+            while (set.size() < 26) {
+                char a = (char) ('A' + k);
+                set.add(a);
+                k++;
+            }
+            ArrayList<Character> list = new ArrayList<>(set);
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < chars2.length; i++) {
+                if (chars2[i] == ' ') {
+                    sb.append(chars2[i]);
+                } else if (chars2[i] < 'a') {
+                    int n = (int) (chars2[i] - 'A');
+                    char c = list.get(n);
+                    sb.append(c);
+                } else {
+                    int n = (int) (chars2[i] - 'a');
+                    char c = (char) (list.get(n) + 'a' - 'A');
+                    sb.append(c);
+                }
+
+            }
+
+            System.out.println(sb.toString());
+        }
+    }
+
+    public static void juzhen(){
+        Scanner sc = new Scanner(System.in);
+        while(sc.hasNext()){
+            int n = sc.nextInt();
+            StringBuffer str = new StringBuffer();
+            int a = 1;
+            int b = 0;
+            for(int i=0;i<n;i++){
+                a = a +i;
+                b = a;
+                for(int j=0;j<n-i;j++){
+                    str.append(b+" ");
+                    b = b+ j+i+2;
+                }
+                System.out.println(str.toString().trim());
+                str = new StringBuffer();
+            }
+        }
+    }
+
+
+
+    public static String convert(String str) {
+        int n = 4;
+        if (str.contains(".")) {
+            String[] fields = str.split("\\.");
+            long result = 0;
+            for (int i = 0; i < n; i++) {
+                result = result * 256 + Integer.parseInt(fields[i]);
+            }
+            return "" + result;
+        } else {
+            long ipv4 = Long.parseLong(str);
+            String result = "";
+            for (int i = 0; i < n; i++) {
+                result = ipv4 % 256 + "." + result;
+                ipv4 /= 256;
+            }
+            return result.substring(0, result.length() - 1);
+        }
+    }
+
+    private static String intToBinary(String ipSplit) {
+        if (ipSplit.equals("0")){
+            return "00000000";
+        }
+        String bin = Integer.toBinaryString(Integer.parseInt(ipSplit));
+        int bitNum = 8;
+        if (bin.length() < bitNum){
+            bitNum -= bin.length();
+            while (bitNum > 0){
+                bin = "0"+bin;
+                bitNum --;
+            }
+        }
+
+
+        return bin;
+
+    }
+
+    private static void removeChar(String str) {
+        Map<Character,Integer> map = new HashMap<>(16);
+        int length = str.length();
+        for (int i = 0; i < length; i++){
+            char c = str.charAt(i);
+            if (map.containsKey(c)){
+                Integer integer = map.get(c);
+                map.put(c,++integer);
+            }else {
+                map.put(c,1);
+            }
+        }
+
+        int min = length;
+        for (Integer value : map.values()) {
+            min = Math.min(value,min);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++){
+            char c = str.charAt(i);
+            if (map.get(c) == min){
+                continue;
+            }
+            sb.append(c);
+        }
+
+        System.out.println(sb.toString());
+
+
+    }
+
+    private static void drinkAeratedWater(int a) {
+        if (a == 0){
+            return;
+        }
+        int sum = 0;
+        int yu = 0;
+        while (a  >= 3){
+            yu = a % 3;
+            sum += a / 3;
+            a = a / 3 + yu;
+        }
+        if ( a == 2){
+            sum ++;
+        }
+
+        System.out.println( sum);
+    }
 
 
     /**
