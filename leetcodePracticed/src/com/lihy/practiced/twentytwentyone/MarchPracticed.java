@@ -1,5 +1,6 @@
 package com.lihy.practiced.twentytwentyone;
 
+import java.util.Arrays;
 /**
  * 三月算法练习
  *
@@ -20,13 +21,11 @@ public class MarchPracticed {
         }
         
         int n = envelopes.length;
-        Arrays.sort(envelopes, new Comparator<int[]>() {
-            public int compare(int[] e1, int[] e2) {
-                if (e1[0] != e2[0]) {
-                    return e1[0] - e2[0];
-                } else {
-                    return e2[1] - e1[1];
-                }
+        Arrays.sort(envelopes, (e1, e2) -> {
+            if (e1[0] != e2[0]) {
+                return e1[0] - e2[0];
+            } else {
+                return e2[1] - e1[1];
             }
         });
 
