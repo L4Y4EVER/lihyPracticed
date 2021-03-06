@@ -1,6 +1,9 @@
 package com.lihy.practiced.twentytwentyone;
 
 import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * 三月算法练习
  *
@@ -13,6 +16,69 @@ public class MarchPracticed {
     public static void main(String[] args) {
         MarchPracticed marchPracticed = new MarchPracticed();
         marchPracticed.countBits(2);
+    }
+
+    /**
+     * 03-05
+     * 两个栈实现一个队列
+     */
+    class MyQueue {
+        private Deque<Integer> deque;
+        private Deque<Integer> que;
+
+
+        /** Initialize your data structure here. */
+        public MyQueue() {
+            deque = new LinkedList<>();
+            que = new LinkedList<>();
+        }
+
+        /** Push element x to the back of queue. */
+        public void push(int x) {
+            deque.push(x);
+        }
+
+        /** Removes the element from in front of queue and returns that element. */
+        public int pop() {
+            int size = deque.size();
+            while ( size > 0){
+                que.push(deque.pop());
+                size --;
+            }
+            Integer pop = que.pop();
+
+            int qSize = que.size();
+            while (qSize >0 ){
+                deque.push(que.pop());
+                qSize --;
+            }
+
+            return pop;
+        }
+
+        /** Get the front element. */
+        public int peek() {
+            int size = deque.size();
+            while ( size > 0){
+                que.push(deque.pop());
+                size --;
+            }
+
+            Integer peek = que.peek();
+
+            int qSize = que.size();
+            while (qSize >0 ){
+                deque.push(que.pop());
+                qSize --;
+            }
+
+            return peek;
+        }
+
+        /** Returns whether the queue is empty. */
+        public boolean empty() {
+            return deque.isEmpty() && que.isEmpty();
+        }
     }
     
     public int maxEnvelopes(int[][] envelopes) {
