@@ -1,8 +1,6 @@
 package com.lihy.practiced.twentytwentyone;
 
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * 三月算法练习
@@ -16,6 +14,49 @@ public class MarchPracticed {
     public static void main(String[] args) {
         MarchPracticed marchPracticed = new MarchPracticed();
         marchPracticed.countBits(2);
+    }
+
+    boolean[][] f;
+    List<List<String>> ret = new ArrayList<List<String>>();
+    List<String> ans = new ArrayList<String>();
+    int n;
+
+
+    public void dfs(String s, int i) {
+        if (i == n) {
+            ret.add(new ArrayList<String>(ans));
+            return;
+        }
+        for (int j = i; j < n; ++j) {
+            if (f[i][j]) {
+                ans.add(s.substring(i, j + 1));
+                dfs(s, j + 1);
+                ans.remove(ans.size() - 1);
+            }
+        }
+    }
+
+    /**
+     * 分割回文串
+     *
+     * @param s s
+     * @return 回文串
+     */
+    public List<List<String>> partition(String s) {
+        n = s.length();
+        f = new boolean[n][n];
+        for (int i = 0; i < n; ++i) {
+            Arrays.fill(f[i], true);
+        }
+
+        for (int i = n - 1; i >= 0; --i) {
+            for (int j = i + 1; j < n; ++j) {
+                f[i][j] = (s.charAt(i) == s.charAt(j)) && f[i + 1][j - 1];
+            }
+        }
+
+        dfs(s, 0);
+        return ret;
     }
 
     /**
