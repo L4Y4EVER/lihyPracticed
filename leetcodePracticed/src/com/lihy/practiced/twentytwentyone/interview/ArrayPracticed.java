@@ -8,15 +8,50 @@ public class ArrayPracticed {
 
 
     public static void main(String[] args) {
-        int size = 10000000;
-        int[] nums = new int[size];
+//        int size = 10000000;
+//        int[] nums = new int[size];
+//
+//        for (int i = 0; i < size; i++){
+//            nums[i] = i;
+//        }
+//
+//        System.out.println(binarySearch(nums,10));
 
-        for (int i = 0; i < size; i++){
-            nums[i] = i;
+        int[] nums = {1,0,3,0,2};
+        movie(nums);
+        for (int num : nums) {
+            System.out.println(num);
         }
 
-        System.out.println(binarySearch(nums,10));
     }
+
+    /**
+     * 删除数组中的为0 数
+     *
+     * @param nums 数组
+     */
+    public static void movie(int[] nums){
+        if (nums.length == 0){
+            return;
+        }
+
+        int k = 0;
+        for (int i = 0; i < nums.length; i++){
+            if (nums[i] != 0){
+                if (k != i){
+                    int temp = nums[k];
+                    nums[k] = nums[i];
+                    nums[i] = temp;
+                    k++;
+                }else {
+                    k ++;
+                }
+            }
+        }
+
+    }
+
+
 
 
     /**
@@ -34,7 +69,7 @@ public class ArrayPracticed {
 
         int left = 0;
         int right = nums.length - 1;
-        int mid = 0;
+        int mid;
 
         while (left <= right){
             mid = left + (right - left) / 2;
