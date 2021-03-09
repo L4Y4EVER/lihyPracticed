@@ -16,6 +16,38 @@ public class MarchPracticed {
         marchPracticed.countBits(2);
     }
 
+    /**
+     * 删除重复字符
+     *
+     * @param S s
+     * @return 删除后的字符串
+     */
+    public String removeDuplicates(String S) {
+        if(S.equals("") || S.length() == 0){
+            return "";
+        }
+        StringBuilder stack = new StringBuilder();
+        int top = -1;
+
+        for (int i = 0; i < S.length(); i++){
+            char ch = S.charAt(i);
+            if (top >= 0 && stack.charAt(top) == ch) {
+                stack.deleteCharAt(top);
+                --top;
+            } else {
+                stack.append(ch);
+                ++top;
+            }
+        }
+
+        return stack.toString();
+    }
+
+
+
+
+
+
     boolean[][] f;
     List<List<String>> ret = new ArrayList<List<String>>();
     List<String> ans = new ArrayList<String>();
