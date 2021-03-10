@@ -18,7 +18,7 @@ public class ArrayPracticed {
         System.out.println(binarySearch(nums1,10));
 
         int[] nums2 = {1,0,3,0,2};
-        movie(nums2);
+        moveZero(nums2);
         for (int num : nums2) {
             System.out.println(num);
         }
@@ -30,7 +30,7 @@ public class ArrayPracticed {
      *
      * @param nums 数组
      */
-    public static void movie(int[] nums){
+    public static void moveZero(int[] nums){
         if (nums.length == 0){
             return;
         }
@@ -42,13 +42,10 @@ public class ArrayPracticed {
                     int temp = nums[k];
                     nums[k] = nums[i];
                     nums[i] = temp;
-                    k++;
-                }else {
-                    k ++;
                 }
+                k++;
             }
         }
-
     }
 
 
