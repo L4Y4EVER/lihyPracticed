@@ -107,6 +107,23 @@ public class ArrayPracticed {
     }
 
 
+    /**
+     * 每个元素最多出现2次
+     *
+     * @param nums 目标处理数组
+     * @return 结果
+     */
+    public int removeDuplicatesPlus(int[] nums) {
+        if (nums.length == 0){
+            return 0;
+        }
+
+
+        // todo 逻辑待实现
+        return 0;
+    }
+
+
 
     /**
      * 对有序数组进行二分查找。
