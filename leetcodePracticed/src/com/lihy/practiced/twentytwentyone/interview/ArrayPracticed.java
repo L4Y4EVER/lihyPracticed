@@ -8,18 +8,18 @@ public class ArrayPracticed {
 
 
     public static void main(String[] args) {
-//        int size = 10000000;
-//        int[] nums = new int[size];
-//
-//        for (int i = 0; i < size; i++){
-//            nums[i] = i;
-//        }
-//
-//        System.out.println(binarySearch(nums,10));
+        int size = 10000000;
+        int[] nums1 = new int[size];
 
-        int[] nums = {1,0,3,0,2};
-        movie(nums);
-        for (int num : nums) {
+        for (int i = 0; i < size; i++){
+            nums1[i] = i;
+        }
+
+        System.out.println(binarySearch(nums1,10));
+
+        int[] nums2 = {1,0,3,0,2};
+        movie(nums2);
+        for (int num : nums2) {
             System.out.println(num);
         }
 
