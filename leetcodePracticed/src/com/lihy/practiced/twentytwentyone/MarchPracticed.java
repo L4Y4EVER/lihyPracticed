@@ -9,28 +9,124 @@ import java.util.*;
  * @date 2021/3/3
  */
 public class MarchPracticed {
+    MarchPracticed(){
 
+    }
 
     public static void main(String[] args) {
         MarchPracticed marchPracticed = new MarchPracticed();
         marchPracticed.countBits(2);
     }
 
+
+
+    int[][] sums;
+
+    public MarchPracticed(int[][] matrix) {
+        int m = matrix.length;
+        if (m > 0) {
+            int n = matrix[0].length;
+            sums = new int[m][n + 1];
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    sums[i][j + 1] = sums[i][j] + matrix[i][j];
+                }
+            }
+        }
+    }
+
+    public int sumRegion(int row1, int col1, int row2, int col2) {
+        int sum = 0;
+        for (int i = row1; i <= row2; i++) {
+            sum += sums[i][col2 + 1] - sums[i][col1];
+        }
+        return sum;
+    }
+
+    /**
+     * 基本计算器
+     *
+     * @param s 入参
+     * @return 结果
+     */
+    public int calculateOne(String s) {
+        Deque<Integer> ops = new LinkedList<Integer>();
+        ops.push(1);
+        int sign = 1;
+
+        int ret = 0;
+        int n = s.length();
+        int i = 0;
+        while (i < n) {
+            if (s.charAt(i) == ' ') {
+                i++;
+            } else if (s.charAt(i) == '+') {
+                sign = ops.peek();
+                i++;
+            } else if (s.charAt(i) == '-') {
+                sign = -ops.peek();
+                i++;
+            } else if (s.charAt(i) == '(') {
+                ops.push(sign);
+                i++;
+            } else if (s.charAt(i) == ')') {
+                ops.pop();
+                i++;
+            } else {
+                long num = 0;
+                while (i < n && Character.isDigit(s.charAt(i))) {
+                    num = num * 10 + s.charAt(i) - '0';
+                    i++;
+                }
+                ret += sign * num;
+            }
+        }
+        return ret;
+    }
+
+
+    /**
+     * 基本计算器||
+     *
+     * @param s 入参
+     * @return 结果
+     */
+    public int calculate(String s) {
+        if ("".equals(s) || s.length() == 0){
+            return 0;
+        }
+        // 顺序接入
+        int[] nums = new int[s.length()];
+        LinkedHashMap<Character,Integer> hashMap = new LinkedHashMap<>();
+
+
+        for (int i = 0; i < s.length(); i++){
+            char c = s.charAt(i);
+            if ( c == '+' || c == '-' || c == '*' || c == '/' ){
+
+            }
+        }
+
+
+        return 0;
+    }
+
     /**
      * 删除重复字符
      *
-     * @param S s
+     * @param str s
      * @return 删除后的字符串
      */
-    public String removeDuplicates(String S) {
-        if(S.equals("") || S.length() == 0){
+    public String removeDuplicates(String str) {
+
+        if("".equals(str) || str.length() == 0){
             return "";
         }
         StringBuilder stack = new StringBuilder();
         int top = -1;
 
-        for (int i = 0; i < S.length(); i++){
-            char ch = S.charAt(i);
+        for (int i = 0; i < str.length(); i++){
+            char ch = str.charAt(i);
             if (top >= 0 && stack.charAt(top) == ch) {
                 stack.deleteCharAt(top);
                 --top;
@@ -94,15 +190,16 @@ public class MarchPracticed {
     /**
      * 03-06
      *
-     * @param nums
-     * @return
+     * @param nums 入参
+     * @return 结果
      */
     public int[] nextGreaterElements(int[] nums) {
         int n = nums.length;
         int[] ret = new int[n];
         Arrays.fill(ret, -1);
         Deque<Integer> stack = new LinkedList<Integer>();
-        for (int i = 0; i < n * 2 - 1; i++) {
+        int cap = 2;
+        for (int i = 0; i < n * cap - 1; i++) {
             while (!stack.isEmpty() && nums[stack.peek()] < nums[i % n]) {
                 ret[stack.pop()] = nums[i % n];
             }
@@ -139,7 +236,7 @@ public class MarchPracticed {
                 que.push(deque.pop());
                 size --;
             }
-            Integer pop = que.pop();
+            int pop = que.pop();
 
             int qSize = que.size();
             while (qSize >0 ){
@@ -158,7 +255,7 @@ public class MarchPracticed {
                 size --;
             }
 
-            Integer peek = que.peek();
+            int peek = que.peek();
 
             int qSize = que.size();
             while (qSize >0 ){
