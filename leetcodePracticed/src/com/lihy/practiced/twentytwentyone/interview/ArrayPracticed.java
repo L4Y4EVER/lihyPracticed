@@ -8,20 +8,20 @@ public class ArrayPracticed {
 
 
     public static void main(String[] args) {
-//        int size = 10000000;
-//        int[] nums1 = new int[size];
-//
-//        for (int i = 0; i < size; i++){
-//            nums1[i] = i;
-//        }
-//
-//        System.out.println(binarySearch(nums1,10));
-//
-//        int[] nums2 = {1,0,3,0,2};
-//        moveZero(nums2);
-//        for (int num : nums2) {
-//            System.out.println(num);
-//        }
+        int size = 10000000;
+        int[] nums1 = new int[size];
+
+        for (int i = 0; i < size; i++){
+            nums1[i] = i;
+        }
+
+        System.out.println(binarySearch(nums1,10));
+
+        int[] nums2 = {1,0,3,0,2};
+        moveZero(nums2);
+        for (int num : nums2) {
+            System.out.println(num);
+        }
 
         int[] nums3 = {0,0,0,1,1,2,3,3,5};
         int num = removeDuplicatesPlus(nums3);
