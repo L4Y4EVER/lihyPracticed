@@ -8,19 +8,25 @@ public class ArrayPracticed {
 
 
     public static void main(String[] args) {
-        int size = 10000000;
-        int[] nums1 = new int[size];
+//        int size = 10000000;
+//        int[] nums1 = new int[size];
+//
+//        for (int i = 0; i < size; i++){
+//            nums1[i] = i;
+//        }
+//
+//        System.out.println(binarySearch(nums1,10));
+//
+//        int[] nums2 = {1,0,3,0,2};
+//        moveZero(nums2);
+//        for (int num : nums2) {
+//            System.out.println(num);
+//        }
 
-        for (int i = 0; i < size; i++){
-            nums1[i] = i;
-        }
-
-        System.out.println(binarySearch(nums1,10));
-
-        int[] nums2 = {1,0,3,0,2};
-        moveZero(nums2);
-        for (int num : nums2) {
-            System.out.println(num);
+        int[] nums3 = {0,0,0,1,1,2,3,3,5};
+        int num = removeDuplicatesPlus(nums3);
+        for (int i = 0; i < num; i++){
+            System.out.println(nums3[i]);
         }
 
     }
@@ -108,19 +114,41 @@ public class ArrayPracticed {
 
 
     /**
-     * 每个元素最多出现2次
+     * 每个元素最多出现2次,有序数组
+     * 依照上面的条件，还是类似的维护到k 的元素都是满足至多出现两次的
+     * 又因为是有序的，出现次数可以累加，判断是否达到一个数，就可以满足2次的条件了
+     * 这个时候就是，每个数都要判断，不仅如次还要判断是否等于一个值
      *
      * @param nums 目标处理数组
      * @return 结果
      */
-    public int removeDuplicatesPlus(int[] nums) {
+    public static int removeDuplicatesPlus(int[] nums) {
         if (nums.length == 0){
             return 0;
         }
 
+        int k = 0;
+        int count = 0;
+        for (int i = 1; i < nums.length; i++){
+            // 当两个数相等的时候，判断数量时候是否==0 表示这个数只有一个
+            if (nums[k] == nums[i]){
+                if (count == 0 ){
+                    k++;
+                    count++;
+                    nums[k] = nums[i];
+                }
+            }else {
+                // 当数只出现一个的时候 进行归零
+                if (i != k){
+                    k++;
+                    count = 0;
+                    nums[k] = nums[i];
+                }
+            }
 
-        // todo 逻辑待实现
-        return 0;
+        }
+
+        return k + 1;
     }
 
 
