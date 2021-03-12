@@ -58,6 +58,7 @@ public class MarchPracticed {
                     deque.push(top);
                 }
                 deque.push(2);
+                num++;
             }
         }
 
