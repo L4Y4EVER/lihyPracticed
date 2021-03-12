@@ -18,7 +18,51 @@ public class MarchPracticed {
         marchPracticed.countBits(2);
     }
 
+    /**
+     * 判断一个二叉树的前序遍历序列化是否正确
+     * 二叉树的前序便利为每次都操作当前节点，然后是左子节点，然后是右子节点
+     * 按照这个操作就是，当遇到两个#号的时候，表示该子树终结了
+     * 首先明确二叉树的定义，以及前序遍历的定义
+     * 当前节点，0，左子节点 0 + 1；左子节点一直到头，就是到一个# 终止了
+     *
+     * @param preorder 入参
+     * @return 是否正确
+     */
+    public boolean isValidSerialization(String preorder) {
+        if ("".equals(preorder) || preorder.length() == 0){
+            return true;
+        }
 
+        // 根据 , 分割字符串
+        String[] split = preorder.split(",");
+        Deque<Integer> deque = new LinkedList<>();
+        deque.push(1);
+
+        int num = 0;
+        while (num < split.length ){
+            if (deque.isEmpty()){
+                return false;
+            }
+            String str = split[num];
+            // 如果当前元素为# 则进行以下判断
+            if ("#".equals(str)){
+                // 而且同时是 # 那么表示是个完整的子树栈顶两个元素推出
+                int top = deque.pop() - 1;
+                if (top > 0){
+                    deque.push(top);
+                }
+                num ++;
+            }else {
+                int top = deque.pop() - 1;
+                if (top > 0) {
+                    deque.push(top);
+                }
+                deque.push(2);
+            }
+        }
+
+        return deque.isEmpty();
+    }
 
     int[][] sums;
 
