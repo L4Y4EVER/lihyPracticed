@@ -8,20 +8,20 @@ public class ArrayPracticed {
 
 
     public static void main(String[] args) {
-        int size = 10000000;
-        int[] nums1 = new int[size];
-
-        for (int i = 0; i < size; i++){
-            nums1[i] = i;
-        }
-
-        System.out.println(binarySearch(nums1,10));
-
-        int[] nums2 = {1,0,3,0,2};
-        moveZero(nums2);
-        for (int num : nums2) {
-            System.out.println(num);
-        }
+//        int size = 10000000;
+//        int[] nums1 = new int[size];
+//
+//        for (int i = 0; i < size; i++){
+//            nums1[i] = i;
+//        }
+//
+//        System.out.println(binarySearch(nums1,10));
+//
+//        int[] nums2 = {1,0,3,0,2};
+//        moveZero(nums2);
+//        for (int num : nums2) {
+//            System.out.println(num);
+//        }
 
         int[] nums3 = {0,0,0,1,1,2,3,3,5};
         int num = removeDuplicatesPlus(nums3);
@@ -128,22 +128,16 @@ public class ArrayPracticed {
         }
 
         int k = 0;
-        int count = 0;
+        int count = 1;
         for (int i = 1; i < nums.length; i++){
-            // 当两个数相等的时候，判断数量时候是否==0 表示这个数只有一个
-            if (nums[k] == nums[i]){
-                if (count == 0 ){
-                    k++;
-                    count++;
-                    nums[k] = nums[i];
-                }
-            }else {
-                // 当数只出现一个的时候 进行归零
-                if (i != k){
-                    k++;
-                    count = 0;
-                    nums[k] = nums[i];
-                }
+            if (nums[i] == nums[i - 1] ){
+                count++;
+            }
+            else {
+                count = 1;
+            }
+            if (count <= 2){
+                nums[++k] = nums[i];
             }
 
         }
