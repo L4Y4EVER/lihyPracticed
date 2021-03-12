@@ -46,13 +46,13 @@ public class MarchPracticed {
             String str = split[num];
             // 如果当前元素为# 则进行以下判断
             if ("#".equals(str)){
-                // 而且同时是 # 那么表示是个完整的子树栈顶两个元素推出
+                // 遇到空值消耗一个槽
                 int top = deque.pop() - 1;
                 if (top > 0){
                     deque.push(top);
                 }
                 num ++;
-            }else {
+            }else { // 遇到非空节点，消耗一个槽，并补充两个槽
                 int top = deque.pop() - 1;
                 if (top > 0) {
                     deque.push(top);

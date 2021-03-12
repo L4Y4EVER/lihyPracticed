@@ -32,6 +32,15 @@ public class ArrayPracticed {
     }
 
     /**
+     *
+     * @param nums
+     */
+    public void sortColors(int[] nums) {
+
+    }
+
+
+    /**
      * 删除数组中的为0 数
      *
      * @param nums 数组
