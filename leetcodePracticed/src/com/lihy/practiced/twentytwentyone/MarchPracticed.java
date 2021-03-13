@@ -373,3 +373,30 @@ public class MarchPracticed {
         return str;
     }
 }
+
+/**
+ * 3-13 题
+ */
+class MyHashSet {
+
+    private Map<Integer,Object> hashSet;
+
+
+    /** Initialize your data structure here. */
+    public MyHashSet() {
+        hashSet = new HashMap<>();
+    }
+
+    public void add(int key) {
+        hashSet.put(key,null);
+    }
+
+    public void remove(int key) {
+        hashSet.remove(key);
+    }
+
+    /** Returns true if this set contains the specified element */
+    public boolean contains(int key) {
+        return hashSet.containsKey(key);
+    }
+}
