@@ -14,8 +14,11 @@ public class MarchPracticed {
     }
 
     public static void main(String[] args) {
-        MarchPracticed marchPracticed = new MarchPracticed();
-        marchPracticed.countBits(2);
+//        MarchPracticed marchPracticed = new MarchPracticed();
+//        marchPracticed.countBits(2);
+
+        List list = new ArrayList(16);
+        System.out.println(list.size());
     }
 
     /**
@@ -398,5 +401,194 @@ class MyHashSet {
     /** Returns true if this set contains the specified element */
     public boolean contains(int key) {
         return hashSet.containsKey(key);
+    }
+}
+class MyHashMap {
+
+    private Node[] table;
+
+    private int capacity = 43;
+
+    /** Initialize your data structure here. */
+    public MyHashMap() {
+        table = new Node[capacity];
+    }
+
+    /** value will always be non-negative. */
+    public void put(int key, int value) {
+        int index = key % capacity;
+        Node node = new Node(key, value);
+        Node curNode = table[index];
+        if (curNode == null){
+            table[index] = node;
+        }else {
+            if (key != curNode.key){
+                if (curNode.next == null){
+                    curNode.next = node;
+                }else {
+                    Node perNode = curNode;
+                    Node next = curNode.next;
+
+                    while (next != null){
+                        perNode = perNode.next;
+                        next = next.next;
+                    }
+                    perNode.next = node;
+                }
+
+            }else {
+                curNode.value = value;
+            }
+        }
+    }
+
+    /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
+    public int get(int key) {
+        int index = key % capacity;
+        Node curNode = table[index];
+        if (curNode == null){
+            return -1;
+        }else {
+            if (curNode.key == key){
+                return curNode.value;
+            }else {
+                Node cur = curNode;
+                while (cur != null){
+                    if (cur.key == key){
+                        return cur.value;
+                    }
+                    cur = cur.next;
+                }
+                return -1;
+            }
+        }
+
+    }
+
+    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
+    public void remove(int key) {
+        int index = key % capacity;
+        Node curNode = table[index];
+        if (curNode != null){
+            if (curNode.next == null){
+                table[index] = null;
+            }else {
+                // 删除链表的节点
+                Node dummy = new Node();
+                dummy.next = curNode;
+                Node perNode = dummy;
+                Node cur = curNode;
+
+                while (cur != null){
+
+                    Node next = cur.next;
+                    if (cur.key == key){
+                        perNode.next = next;
+                        cur.next = null;
+                        break;
+                    }
+                    perNode = cur;
+                    cur = next;
+
+                }
+
+                table[index] = dummy.next;
+
+            }
+        }
+    }
+
+    private static class Node{
+        public int key;
+        public int value;
+
+        public Node next;
+
+        public Node(){
+        }
+
+        public Node(int key,int value){
+            this.key = key;
+            this.value = value;
+        }
+    }
+}
+
+class MyHashMapLeet {
+    private class Pair {
+        private int key;
+        private int value;
+
+        public Pair(int key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public int getKey() {
+            return key;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public void setValue(int value) {
+            this.value = value;
+        }
+    }
+
+    private static final int BASE = 769;
+    private LinkedList[] data;
+
+    /** Initialize your data structure here. */
+    public MyHashMapLeet() {
+        data = new LinkedList[BASE];
+        for (int i = 0; i < BASE; ++i) {
+            data[i] = new LinkedList<Pair>();
+        }
+    }
+
+    /** value will always be non-negative. */
+    public void put(int key, int value) {
+        int h = hash(key);
+        Iterator<Pair> iterator = data[h].iterator();
+        while (iterator.hasNext()) {
+            Pair pair = iterator.next();
+            if (pair.getKey() == key) {
+                pair.setValue(value);
+                return;
+            }
+        }
+        data[h].offerLast(new Pair(key, value));
+    }
+
+    /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
+    public int get(int key) {
+        int h = hash(key);
+        Iterator<Pair> iterator = data[h].iterator();
+        while (iterator.hasNext()) {
+            Pair pair = iterator.next();
+            if (pair.getKey() == key) {
+                return pair.value;
+            }
+        }
+        return -1;
+    }
+
+    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
+    public void remove(int key) {
+        int h = hash(key);
+        Iterator<Pair> iterator = data[h].iterator();
+        while (iterator.hasNext()) {
+            Pair pair = iterator.next();
+            if (pair.key == key) {
+                data[h].remove(pair);
+                return;
+            }
+        }
+    }
+
+    private static int hash(int key) {
+        return key % BASE;
     }
 }
