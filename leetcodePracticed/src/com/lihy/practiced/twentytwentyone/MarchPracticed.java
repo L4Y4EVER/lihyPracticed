@@ -18,6 +18,49 @@ public class MarchPracticed {
 //        marchPracticed.countBits(2);
     }
 
+
+    /**
+     * 给定一个n  获取其平方个数的螺旋矩阵
+     *
+     * @param n n
+     * @return 矩阵
+     */
+    public int[][] generateMatrix(int n) {
+        if (n == 0){
+            return null;
+        }
+        if (n == 1){
+            return new int[][]{{1}};
+        }
+
+        int count = n * n;
+        int[][] matrix = new int[n][n];
+        boolean[][] added = new boolean[n][n];
+        int[][] steps = {{0,1},{1,0},{0,-1},{-1,0}};
+        int row = 0,column = 0,step = 0;
+
+        for (int i = 1; i <= count; i++ ){
+            matrix[row][column] = i;
+            added[row][column] = true;
+
+            int nextRow = row + steps[step][0];
+            int nextColumn = column + steps[step][1];
+            boolean flag = nextRow <= 0 || nextRow >= n
+                    || nextColumn <= 0 || nextColumn >= n
+                    || added[nextRow][nextColumn];
+
+            if (flag){
+                step = (step + 1) % 4;
+            }
+
+            row += steps[step][0];
+            column += steps[step][1];
+        }
+
+        return matrix;
+    }
+
+
     /**
      * 螺旋遍历一个二维矩阵
      *
