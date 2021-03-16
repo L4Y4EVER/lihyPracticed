@@ -30,18 +30,27 @@ public class MarchPracticed {
             return order;
         }
         int rows = matrix.length, columns = matrix[0].length;
+        // 创建一个看过记录
         boolean[][] visited = new boolean[rows][columns];
         int total = rows * columns;
         int row = 0, column = 0;
+        // 根据这个数组，确定该点所在row 的动作
         int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
         int directionIndex = 0;
         for (int i = 0; i < total; i++) {
             order.add(matrix[row][column]);
             visited[row][column] = true;
+            // 计算 下一个点位的坐标
             int nextRow = row + directions[directionIndex][0], nextColumn = column + directions[directionIndex][1];
-            if (nextRow < 0 || nextRow >= rows || nextColumn < 0 || nextColumn >= columns || visited[nextRow][nextColumn]) {
+            // 分别判断了行的范围，列的范围，以及下一个点是否已经读过了
+            boolean flag = nextRow < 0 || nextRow >= rows
+                    || nextColumn < 0 || nextColumn >= columns
+                    || visited[nextRow][nextColumn];
+            if (flag) {
+                // 当满足相关的点，需要加进行 行索引的增加 通过取模的运算，获取当前应该取到的行走方式
                 directionIndex = (directionIndex + 1) % 4;
             }
+            // 修改点位
             row += directions[directionIndex][0];
             column += directions[directionIndex][1];
         }
