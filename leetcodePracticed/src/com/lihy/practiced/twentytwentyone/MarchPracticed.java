@@ -20,6 +20,38 @@ public class MarchPracticed {
 
 
     /**
+     *
+     * 基本锁定记忆 搜索和动态规划，但是学艺不经 竟不去锻炼
+     * 不同的子序列
+     *
+     * @param s 主要字符串
+     * @param t 目标子串
+     * @return 结果
+     */
+    public int numDistinct(String s,String t){
+        int m = s.length(), n = t.length();
+        if (m < n) {
+            return 0;
+        }
+        int[][] dp = new int[m + 1][n + 1];
+        for (int i = 0; i <= m; i++) {
+            dp[i][n] = 1;
+        }
+        for (int i = m - 1; i >= 0; i--) {
+            char sChar = s.charAt(i);
+            for (int j = n - 1; j >= 0; j--) {
+                char tChar = t.charAt(j);
+                if (sChar == tChar) {
+                    dp[i][j] = dp[i + 1][j + 1] + dp[i + 1][j];
+                } else {
+                    dp[i][j] = dp[i + 1][j];
+                }
+            }
+        }
+        return dp[0][0];
+    }
+
+    /**
      * 给定一个n  获取其平方个数的螺旋矩阵
      *
      * @param n n
