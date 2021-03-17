@@ -579,7 +579,7 @@ class MyHashMap {
         }
     }
 
-    private static class Node{
+    public static class Node{
         public int key;
         public int value;
 
