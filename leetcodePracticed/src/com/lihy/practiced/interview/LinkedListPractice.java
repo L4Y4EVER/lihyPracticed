@@ -205,11 +205,12 @@ public class LinkedListPractice {
                 ListNode pre = null;
                 ListNode cur = curNode;
 
-                while (index < n && cur !=null){
+                while (index <= n && cur !=null){
                     ListNode nextNode = cur.next;
                     cur.next = pre;
                     pre = cur;
                     cur = nextNode;
+                    index ++;
                 }
 
                 preNode.next = pre;

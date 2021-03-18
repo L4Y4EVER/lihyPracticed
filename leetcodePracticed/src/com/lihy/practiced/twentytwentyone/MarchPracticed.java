@@ -2,6 +2,8 @@ package com.lihy.practiced.twentytwentyone;
 
 import java.util.*;
 
+import com.lihy.practiced.bean.ListNode;
+
 /**
  * 三月算法练习
  *
@@ -18,6 +20,27 @@ public class MarchPracticed {
 //        marchPracticed.countBits(2);
     }
 
+
+    /**
+     * 反转从left  到 right 之间的
+     *
+     * @param head head
+     * @param left left
+     * @param right right
+     * @return 返回反转后的链表
+     */
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        // 判断为null 的及 一个节点的链表
+        if (head == null || head.next == null || left >= right){
+            return head;
+        }
+
+
+
+
+
+        return head;
+    }
 
     /**
      *
