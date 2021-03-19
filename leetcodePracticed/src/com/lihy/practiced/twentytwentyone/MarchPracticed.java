@@ -728,3 +728,26 @@ class MyHashMapLeet {
         return key % BASE;
     }
 }
+
+class ParkingSystem {
+
+    private Map<Integer,Integer> carParking;
+
+    public ParkingSystem(int big, int medium, int small) {
+        carParking = new HashMap<>(4);
+        carParking.put(1,big);
+        carParking.put(2,medium);
+        carParking.put(3,small);
+
+    }
+
+    public boolean addCar(int carType) {
+        if (carParking.get(carType) != 0){
+            Integer integer = carParking.get(carType);
+            int num = integer - 1;
+            carParking.put(carType,num);
+            return true;
+        }
+        return false;
+    }
+}
