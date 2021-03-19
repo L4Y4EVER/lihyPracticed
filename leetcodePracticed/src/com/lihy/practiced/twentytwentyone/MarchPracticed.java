@@ -731,21 +731,20 @@ class MyHashMapLeet {
 
 class ParkingSystem {
 
-    private Map<Integer,Integer> carParking;
+    private int[] carParking;
 
     public ParkingSystem(int big, int medium, int small) {
-        carParking = new HashMap<>(4);
-        carParking.put(1,big);
-        carParking.put(2,medium);
-        carParking.put(3,small);
+        carParking = new int[4];
+        carParking[1] = big;
+        carParking[2] = medium;
+        carParking[3] = small;
 
     }
 
     public boolean addCar(int carType) {
-        if (carParking.get(carType) != 0){
-            Integer integer = carParking.get(carType);
-            int num = integer - 1;
-            carParking.put(carType,num);
+        int num = carParking[carType];
+        if ( num != 0){
+            carParking[carType]--;
             return true;
         }
         return false;
