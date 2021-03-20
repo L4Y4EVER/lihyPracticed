@@ -18,6 +18,44 @@ public class MarchPracticed {
     public static void main(String[] args) {
 //        MarchPracticed marchPracticed = new MarchPracticed();
 //        marchPracticed.countBits(2);
+
+        String[] tokens = {"4","13","5","/","+"};
+        int i = evalRPN(tokens);
+    }
+
+    /**
+     * 逆波兰表达式运算，首先要理解逆波兰表达式，属于运算符号后缀的一种运算体系。
+     *
+     * @param tokens 表达式
+     * @return 运算结果
+     */
+    public static int evalRPN(String[] tokens) {
+
+        if (tokens == null || tokens.length == 0 ){
+            return 0;
+        }
+        Deque<Integer> deque = new LinkedList<>();
+
+        for (String str : tokens){
+            if ("+".equals(str) || "-".equals(str) || "*".equals(str) || "/".equals(str)){
+                Integer pop = deque.pop();
+                Integer pop1 = deque.pop();
+                int result;
+                if ("+".equals(str)){
+                    result =  pop1 + pop;
+                }else if ("-".equals(str)){
+                    result = pop1 - pop;
+                }else if ("*".equals(str)){
+                    result = pop1 * pop;
+                }else {
+                    result = pop1 / pop;
+                }
+                deque.push(result);
+                continue;
+            }
+            deque.push(Integer.valueOf(str));
+        }
+        return deque.pop();
     }
 
 
