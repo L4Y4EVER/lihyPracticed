@@ -24,6 +24,25 @@ public class MarchPracticed {
     }
 
     /**
+     * 22日问题，返回1的个数
+     *
+     * @param n n
+     * @return
+     */
+    public int hammingWeight(int n) {
+        String toBinaryString = Integer.toBinaryString(n);
+
+        int count = 0;
+        for (int i =0; i<toBinaryString.length();i++){
+            if (toBinaryString.charAt(i) == '1'){
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+    /**
      * 21 号题
      * 矩阵设置0
      *
