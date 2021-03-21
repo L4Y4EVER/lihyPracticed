@@ -24,6 +24,48 @@ public class MarchPracticed {
     }
 
     /**
+     * 21 号题
+     * 矩阵设置0
+     *
+     * @param matrix 矩阵
+     */
+    public void setZeroes(int[][] matrix) {
+        // 获取到行数 与列数 进行初始化标识
+        int rowNums = matrix.length;
+        int colNums = matrix[0].length;
+        boolean[] row = new boolean[rowNums];
+        boolean[] col = new boolean[colNums];
+
+        // 遍历矩阵，修改标记
+        for(int i = 0; i < rowNums; i++){
+            for (int j = 0; j < colNums; j++){
+                if (matrix[i][j] == 0){
+                    row[i] = true;
+                    col[j] = true;
+                }
+            }
+        }
+
+        for (int i = 0; i < rowNums; i++){
+            if (row[i]){
+                int[] rowM = matrix[i];
+                Arrays.fill(rowM,0);
+            }
+        }
+
+        for (int i = 0; i < colNums; i++){
+            if (col[i]){
+                for (int j = 0; j < rowNums; j++){
+                    matrix[j][i] = 0;
+                }
+            }
+        }
+
+
+    }
+
+
+    /**
      * 逆波兰表达式运算，首先要理解逆波兰表达式，属于运算符号后缀的一种运算体系。
      *
      * @param tokens 表达式
