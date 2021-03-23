@@ -883,7 +883,7 @@ class NestedIterator implements Iterator<Integer> {
     public boolean hasNext() {
         while (!stack.isEmpty()){
             Iterator<NestedInteger> it = stack.peek();
-            if (!it.hasNext()) { // 遍历到当前列表末尾，出栈
+            if (!it.hasNext()) {
                 stack.pop();
                 continue;
             }
