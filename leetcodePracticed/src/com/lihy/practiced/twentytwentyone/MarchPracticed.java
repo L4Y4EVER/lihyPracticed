@@ -908,36 +908,38 @@ interface NestedInteger {
 
 class NestedIterator implements Iterator<Integer> {
 
-    private Deque<Iterator<NestedInteger>> stack;
+    private Deque<Iterator<NestedInteger>> deque;
 
     public NestedIterator(List<NestedInteger> nestedList) {
-        stack = new LinkedList<>();
-        stack.push(nestedList.iterator());
+       deque = new LinkedList<>();
+       deque.push(nestedList.iterator());
     }
 
     @Override
     public Integer next() {
-        return stack.peek().next().getInteger();
+        return deque.peek().next().getInteger();
     }
 
     @Override
     public boolean hasNext() {
-        while (!stack.isEmpty()){
-            Iterator<NestedInteger> it = stack.peek();
-            if (!it.hasNext()) {
-                stack.pop();
+
+        while (!deque.isEmpty()){
+            Iterator<NestedInteger> peek = deque.peek();
+            if (!peek.hasNext()){
+                deque.pop();
                 continue;
             }
-            // 若取出的元素是整数，则通过创建一个额外的列表将其重新放入栈中
-            NestedInteger nest = it.next();
-            if (nest.isInteger()) {
+
+            NestedInteger next = peek.next();
+            if (next.isInteger()){
                 List<NestedInteger> list = new ArrayList<>();
-                list.add(nest);
-                stack.push(list.iterator());
+                list.add(next);
+                deque.push(list.iterator());
                 return true;
             }
-            stack.push(nest.getList().iterator());
+            deque.push(next.getList().iterator());
         }
+
         return false;
     }
 }
