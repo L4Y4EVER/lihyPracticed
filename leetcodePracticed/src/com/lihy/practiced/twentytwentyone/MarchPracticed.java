@@ -25,40 +25,82 @@ public class MarchPracticed {
 
 
     /**
+     * 删除链表中重复元素 2
+     *
+     * @param head head
+     * @return 删除后的链表
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null){
+            return head;
+        }
+
+        ListNode dummyHead = new ListNode(-1);
+        dummyHead.next = head;
+
+        ListNode preHead = dummyHead;
+        ListNode curNode = head;
+
+        while (curNode != null){
+            ListNode delete = curNode.next;
+
+            // 遇到相同节点了，进入到删除逻辑
+            if (delete != null && curNode.val == delete.val){
+                // 先删除后面的
+                while (delete != null){
+                    ListNode next = delete.next;
+                    if (delete.val != curNode.val){
+                        break;
+                    }
+
+                    curNode.next = next;
+                    delete.next = null;
+                    delete = next;
+                }
+                // 开始删当前节点
+                preHead.next = delete;
+                curNode.next = null;
+            }else {
+                preHead = curNode;
+            }
+            curNode = delete;
+        }
+
+        return dummyHead.next;
+    }
+
+
+    /**
      * 24 132 问题
      * index  1， 2， 3
      * nums[1] < nums[3] < nums[2]
+     * 枚举i
+     *
+     * 整体思路是，从右向左 遍历，维护nums[k] < nums[j] 同时又能满足 ijk 的顺序
+     * 栈中维护最大的 nums[j]
      *
      * @param nums 数组
      * @return 结果
      */
     public boolean find132pattern(int[] nums) {
-        int n = nums.length;
-        if (n < 3 ){
+        if(nums == null || nums.length == 0){
             return false;
         }
+        int length = nums.length;
+        int k = Integer.MIN_VALUE;
+        Deque<Integer> deque = new LinkedList<>();
 
-        // 左侧最小值
-        int leftMin = nums[0];
-        // 右侧所有元素
-        TreeMap<Integer, Integer> rightAll = new TreeMap<Integer, Integer>();
-
-        for (int k = 2; k < n; ++k) {
-            rightAll.put(nums[k], rightAll.getOrDefault(nums[k], 0) + 1);
-        }
-
-        for (int j = 1; j < n - 1; ++j) {
-            if (leftMin < nums[j]) {
-                Integer next = rightAll.ceilingKey(leftMin + 1);
-                if (next != null && next < nums[j]) {
-                    return true;
-                }
+        for (int i = length - 1; i >= 0; i--){
+            if (nums[i] < k){
+                return true;
             }
-            leftMin = Math.min(leftMin, nums[j]);
-            rightAll.put(nums[j + 1], rightAll.get(nums[j + 1]) - 1);
-            if (rightAll.get(nums[j + 1]) == 0) {
-                rightAll.remove(nums[j + 1]);
+
+            // 判断栈中数字小于当前遍历的值，则更新k，k 为当前次小值，
+            while (!deque.isEmpty() && nums[i] > deque.peekLast()){
+                k = Math.max(k,deque.pollLast());
             }
+            // 维护单调栈
+            deque.addLast(nums[i]);
         }
 
         return false;
