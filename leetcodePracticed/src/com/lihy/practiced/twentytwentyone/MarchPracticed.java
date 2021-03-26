@@ -23,6 +23,37 @@ public class MarchPracticed {
         int i = evalRPN(tokens);
     }
 
+    /**
+     * 删除链表中重复元素
+     *
+     * @param head head
+     * @return 删除后的链表
+     */
+    public ListNode deleteDuplicatesEasy(ListNode head) {
+
+
+        if (head == null){
+            return null;
+        }
+
+        ListNode dummyNode = new ListNode(-1);
+        dummyNode.next = head;
+
+        while (head != null && head.next != null){
+            ListNode delete = head.next;
+            while (delete != null && head.val == delete.val){
+                head.next = head.next.next;
+                delete.next = null;
+                delete = head.next;
+            }
+            head = head.next;
+
+        }
+
+        return dummyNode.next;
+
+    }
+
 
     /**
      * 删除链表中重复元素 2
