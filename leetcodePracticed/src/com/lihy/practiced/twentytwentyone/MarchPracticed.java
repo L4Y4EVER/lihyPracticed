@@ -3,6 +3,7 @@ package com.lihy.practiced.twentytwentyone;
 import java.util.*;
 
 import com.lihy.practiced.bean.ListNode;
+import com.lihy.practiced.util.DataStructureUtils;
 
 /**
  * 三月算法练习
@@ -19,8 +20,59 @@ public class MarchPracticed {
 //        MarchPracticed marchPracticed = new MarchPracticed();
 //        marchPracticed.countBits(2);
 
-        String[] tokens = {"4","13","5","/","+"};
-        int i = evalRPN(tokens);
+//        String[] tokens = {"4","13","5","/","+"};
+//        int i = evalRPN(tokens);
+        Integer[] arr = {1,2,3};
+        ListNode listNode = DataStructureUtils.array2ListNode(arr);
+
+        rotateRight(listNode,4);
+    }
+
+
+    /**
+     * 旋转链表
+     * 对链表进行向后移动k次
+     *
+     * @param head 头节点
+     * @param k 次数
+     * @return 旋转后的链表
+     */
+    public static ListNode rotateRight(ListNode head, int k) {
+        if (head == null || k <= 0 ){
+            return head;
+        }
+
+        ListNode dummyNode = new ListNode(-1);
+        dummyNode.next = head;
+
+        ListNode node = head;
+        int listNodeCount = 0;
+        while (node != null){
+            node = node.next;
+            listNodeCount ++;
+        }
+
+        for (int i = 0; i < k % listNodeCount; i++){
+            ListNode  curNode = dummyNode.next;
+            ListNode lastNode = null;
+            ListNode preNode = dummyNode;
+            while (curNode != null){
+                if (curNode.next == null){
+                    lastNode = curNode;
+                }else {
+                    preNode = preNode.next;
+                }
+                curNode = curNode.next;
+            }
+
+            ListNode next = dummyNode.next;
+            preNode.next = null;
+            lastNode.next = next;
+            dummyNode.next = lastNode;
+
+        }
+
+        return dummyNode.next;
     }
 
     /**
