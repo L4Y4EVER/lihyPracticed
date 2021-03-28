@@ -3,6 +3,7 @@ package com.lihy.practiced.twentytwentyone;
 import java.util.*;
 
 import com.lihy.practiced.bean.ListNode;
+import com.lihy.practiced.bean.TreeNode;
 import com.lihy.practiced.util.DataStructureUtils;
 
 /**
@@ -1061,5 +1062,36 @@ class NestedIterator implements Iterator<Integer> {
         }
 
         return false;
+    }
+}
+
+class BSTIterator {
+
+    List<TreeNode> treeNodes;
+    Iterator<TreeNode> iterator;
+
+    public BSTIterator(TreeNode root) {
+        this.treeNodes = new ArrayList<>();
+
+        inorder(root);
+
+        iterator = treeNodes.iterator();
+    }
+
+    private void inorder(TreeNode root) {
+        if (root == null){
+            return;
+        }
+        inorder(root.left);
+        treeNodes.add(root);
+        inorder(root.right);
+    }
+
+    public int next() {
+        return iterator.next().val;
+    }
+
+    public boolean hasNext() {
+        return iterator.hasNext();
     }
 }
