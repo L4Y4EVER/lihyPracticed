@@ -29,6 +29,21 @@ public class MarchPracticed {
         rotateRight(listNode,4);
     }
 
+    /**
+     * 29号问题，颠倒位
+     *
+     * @param n 二进制数
+     * @return 颠倒后的结果
+     */
+    public int reverseBits(int n) {
+        int rev = 0;
+        for (int i = 0; i < 32 && n != 0; ++i) {
+            rev |= (n & 1) << (31 - i);
+            n >>>= 1;
+        }
+        return rev;
+    }
+
 
     /**
      * 旋转链表
