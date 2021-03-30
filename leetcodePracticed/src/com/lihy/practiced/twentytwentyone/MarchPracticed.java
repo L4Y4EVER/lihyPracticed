@@ -30,6 +30,67 @@ public class MarchPracticed {
     }
 
     /**
+     * 30 日问题
+     * 搜索有序矩阵中是否包含某个数
+     *
+     * @param matrix 矩阵
+     * @param target 目标数字
+     * @return 是否包含
+     */
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix == null){
+            return false;
+        }
+
+        int row = matrix.length;
+        int column = matrix[0].length;
+
+        int rowMid = row / 2;
+        int coMid = column / 2;
+
+        int r = column - 1;
+        int l = 0;
+
+        int u = 0;
+        int d = row -1;
+        // 先确定排，再确定数
+        while (u <= d){
+            if (target > matrix[rowMid][0]){
+                u = rowMid;
+                rowMid = u + ((d - u) / 2);
+            }else if (target < matrix[rowMid][0]){
+                d = rowMid - 1;
+                rowMid = u + ((d - u) / 2);
+            }else {
+                return true;
+            }
+
+            if (u == d){
+                break;
+            }
+        }
+
+        if (u != d){
+            return false;
+        }
+
+        while (r <=l ){
+            if (target > matrix[u][coMid]){
+                l = coMid;
+                coMid = l + (r - l / 2);
+            }else if (target < matrix[u][coMid]){
+                r = coMid;
+                coMid = l + (r - l / 2);
+            }else {
+               return  true;
+            }
+        }
+
+        return false;
+
+    }
+
+    /**
      * 29号问题，颠倒位
      *
      * @param n 二进制数
@@ -1109,4 +1170,43 @@ class BSTIterator {
     public boolean hasNext() {
         return iterator.hasNext();
     }
+}
+
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int rowIndex = binarySearchFirstColumn(matrix, target);
+        if (rowIndex < 0) {
+            return false;
+        }
+        return binarySearchRow(matrix[rowIndex], target);
+    }
+
+    public int binarySearchFirstColumn(int[][] matrix, int target) {
+        int low = -1, high = matrix.length - 1;
+        while (low < high) {
+            int mid = (high - low + 1) / 2 + low;
+            if (matrix[mid][0] <= target) {
+                low = mid;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return low;
+    }
+
+    public boolean binarySearchRow(int[] row, int target) {
+        int low = 0, high = row.length - 1;
+        while (low <= high) {
+            int mid = (high - low) / 2 + low;
+            if (row[mid] == target) {
+                return true;
+            } else if (row[mid] > target) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return false;
+    }
+
 }
