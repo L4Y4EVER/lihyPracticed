@@ -29,6 +29,40 @@ public class MarchPracticed {
         rotateRight(listNode,4);
     }
 
+
+    /**
+     * 31日问题
+     *
+     * @param nums 数组的子集
+     * @return 不重复的子集合
+     */
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        for (int mask = 0; mask < (1 << n); ++mask) {
+            t.clear();
+            boolean flag = true;
+            for (int i = 0; i < n; ++i) {
+                if ((mask & (1 << i)) != 0) {
+                    if (i > 0 && (mask >> (i - 1) & 1) == 0 && nums[i] == nums[i - 1]) {
+                        flag = false;
+                        break;
+                    }
+                    t.add(nums[i]);
+                }
+            }
+            if (flag) {
+                ans.add(new ArrayList<Integer>(t));
+            }
+        }
+        return ans;
+    }
+
+
+    List<Integer> t = new ArrayList<Integer>();
+    List<List<Integer>> ans = new ArrayList<List<Integer>>();
+
+
     /**
      * 30 日问题
      * 搜索有序矩阵中是否包含某个数
@@ -672,20 +706,20 @@ public class MarchPracticed {
 
     boolean[][] f;
     List<List<String>> ret = new ArrayList<List<String>>();
-    List<String> ans = new ArrayList<String>();
+    List<String> ans1 = new ArrayList<String>();
     int n;
 
 
     public void dfs(String s, int i) {
         if (i == n) {
-            ret.add(new ArrayList<String>(ans));
+            ret.add(new ArrayList<String>(ans1));
             return;
         }
         for (int j = i; j < n; ++j) {
             if (f[i][j]) {
-                ans.add(s.substring(i, j + 1));
+                ans1.add(s.substring(i, j + 1));
                 dfs(s, j + 1);
-                ans.remove(ans.size() - 1);
+                ans1.remove(ans.size() - 1);
             }
         }
     }
