@@ -23,10 +23,14 @@ public class MarchPracticed {
 
 //        String[] tokens = {"4","13","5","/","+"};
 //        int i = evalRPN(tokens);
-        Integer[] arr = {1,2,3};
-        ListNode listNode = DataStructureUtils.array2ListNode(arr);
+        int[] arr = {1,2,3};
+//        ListNode listNode = DataStructureUtils.array2ListNode(arr);
+//
+//        rotateRight(listNode,4);
 
-        rotateRight(listNode,4);
+        System.out.println(2<<3);
+
+        subsetsWithDup(arr);
     }
 
 
@@ -36,7 +40,7 @@ public class MarchPracticed {
      * @param nums 数组的子集
      * @return 不重复的子集合
      */
-    public List<List<Integer>> subsetsWithDup(int[] nums) {
+    public static List<List<Integer>> subsetsWithDup(int[] nums) {
         Arrays.sort(nums);
         int n = nums.length;
         for (int mask = 0; mask < (1 << n); ++mask) {
@@ -59,8 +63,8 @@ public class MarchPracticed {
     }
 
 
-    List<Integer> t = new ArrayList<Integer>();
-    List<List<Integer>> ans = new ArrayList<List<Integer>>();
+    static List<Integer> t = new ArrayList<Integer>();
+    static List<List<Integer>> ans = new ArrayList<List<Integer>>();
 
 
     /**
