@@ -1,9 +1,9 @@
 package com.lihy.practiced.twentytwentyone;
 
-import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.Map;
 
 /**
  * 四月每日一题
@@ -17,6 +17,26 @@ public class AprilPracticed {
         System.out.println(clumsy(10));;
     }
 
+
+    /**
+     * 4号问题，森林里有多少兔子
+     *
+     * @param answers 回答数组
+     * @return 结果
+     */
+    public int numRabbits(int[] answers) {
+        Map<Integer, Integer> count = new HashMap<>();
+        for (int y : answers) {
+            count.put(y, count.getOrDefault(y, 0) + 1);
+        }
+        int ans = 0;
+        for (Map.Entry<Integer, Integer> entry : count.entrySet()) {
+            int y = entry.getKey(), x = entry.getValue();
+            ans += (x + y) / (y + 1) * (y + 1);
+        }
+        return ans;
+
+    }
 
     /**
      * 03
