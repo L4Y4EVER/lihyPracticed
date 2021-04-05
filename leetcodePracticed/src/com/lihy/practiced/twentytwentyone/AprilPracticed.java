@@ -1,9 +1,6 @@
 package com.lihy.practiced.twentytwentyone;
 
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 四月每日一题
@@ -15,6 +12,29 @@ public class AprilPracticed {
 
     public static void main(String[] args) {
         System.out.println(clumsy(10));;
+    }
+
+
+    /**
+     * 5号问题，合并有序数组
+     *
+     * @param nums1 数组1
+     * @param m 数组1元素容量
+     * @param nums2 数组2
+     * @param n 数组2 元素容量
+     */
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int p = m + n - 1;
+        int p1 = m-1;
+        int p2 = n-1;
+
+        while ( p1 >= 0 && p2 >= 0) {
+            nums1[p--] = nums1[p1] > nums2[p2] ? nums1[p1--] : nums2[p2--];
+        }
+
+        if ( n > 0){
+            System.arraycopy(nums2,0,nums1,0,p2 + 1);
+        }
     }
 
 
