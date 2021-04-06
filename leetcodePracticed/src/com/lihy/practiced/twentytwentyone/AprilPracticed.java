@@ -16,6 +16,35 @@ public class AprilPracticed {
 
 
     /**
+     * 6号问题，删除数组中重复的值
+     *
+     * @param nums 数组
+     * @return 结果
+     */
+    public int removeDuplicates(int[] nums) {
+        if (nums.length == 0){
+            return 0;
+        }
+
+        int k = 0;
+        int count = 1;
+        for (int i = 1; i < nums.length; i++){
+            if (nums[i] == nums[i - 1] ){
+                count++;
+            }
+            else {
+                count = 1;
+            }
+            if (count <= 2){
+                nums[++k] = nums[i];
+            }
+
+        }
+
+        return k + 1;
+    }
+
+    /**
      * 5号问题，合并有序数组
      *
      * @param nums1 数组1
