@@ -16,6 +16,26 @@ public class AprilPracticed {
 
 
     /**
+     * 7 号问题
+     *
+     * @param x 数
+     * @param n 名字
+     * @return 结果
+     */
+    public double myPow(double x, int n) {
+        long N = n;
+        return N >= 0 ? quickMul(x, N) : 1.0 / quickMul(x, -N);
+    }
+
+    public double quickMul(double x, long N) {
+        if (N == 0) {
+            return 1.0;
+        }
+        double y = quickMul(x, N / 2);
+        return N % 2 == 0 ? y * y : y * y * x;
+    }
+
+    /**
      * 6号问题，删除数组中重复的值
      *
      * @param nums 数组
