@@ -16,7 +16,22 @@ public class AprilPracticed {
 
 
     /**
-     * 7 号问题
+     * 在被旋转过的数组中找到目标值
+     *
+     * @param nums nums
+     * @param target 目标值
+     * @return 结果
+     */
+    public boolean search(int[] nums, int target) {
+        if (nums == null || nums.length == 0){
+            return false;
+        }
+        return Arrays.stream(nums).allMatch(n -> n == target);
+    }
+
+
+    /**
+     * 7 号做的问题 但是不是每日一题
      *
      * @param x 数
      * @param n 名字
