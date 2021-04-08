@@ -16,6 +16,17 @@ public class AprilPracticed {
 
 
     /**
+     * 08号问题
+     *
+     * @param nums 入参数组
+     * @return 结果
+     */
+    public int findMin(int[] nums) {
+        return Arrays.stream(nums).min().getAsInt();
+    }
+
+
+    /**
      * 在被旋转过的数组中找到目标值
      *
      * @param nums nums
