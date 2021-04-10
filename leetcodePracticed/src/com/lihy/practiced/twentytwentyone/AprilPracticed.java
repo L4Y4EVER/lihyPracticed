@@ -16,6 +16,26 @@ public class AprilPracticed {
 
 
     /**
+     * 10 日问题
+     *
+     * @param n 判断数字是否为丑数
+     * @return 结果
+     */
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        int[] factors = {2, 3, 5};
+        for (int factor : factors) {
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        return n == 1;
+    }
+
+
+    /**
      * 08号问题
      *
      * @param nums 入参数组
