@@ -1,6 +1,7 @@
 package com.lihy.practiced.twentytwentyone;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 四月每日一题
@@ -12,6 +13,60 @@ public class AprilPracticed {
 
     public static void main(String[] args) {
         System.out.println(clumsy(10));;
+    }
+
+
+    /**
+     * 重新排列数组中元素内容，返回一个最大的值
+     *
+     * @param nums 数组
+     * @return 结果
+     */
+    public String largestNumber(int[] nums) {
+        if (nums == null || nums.length == 0){
+            return "0";
+        }
+        return Arrays.stream(nums).boxed().sorted((i1, i2) -> {
+            String i1String = i1 + "";
+            String i2String = i2 + "";
+            int compare = Integer.compare(Integer.parseInt(i2String.substring(0,1)),
+                    Integer.parseInt(i1String.substring(0,1)));
+
+            if (compare == 0){
+                return Integer.compare(i2, i1);
+            }else {
+                return compare;
+            }
+        }).map(String::valueOf).collect(Collectors.joining());
+    }
+
+    public String largestNumberLeetcode(int[] nums) {
+        int n = nums.length;
+        // 转换成包装类型，以便传入 Comparator 对象（此处为 lambda 表达式）
+        Integer[] numsArr = new Integer[n];
+        for (int i = 0; i < n; i++) {
+            numsArr[i] = nums[i];
+        }
+
+        Arrays.sort(numsArr, (x, y) -> {
+            long sx = 10, sy = 10;
+            while (sx <= x) {
+                sx *= 10;
+            }
+            while (sy <= y) {
+                sy *= 10;
+            }
+            return (int) (-sy * x - y + sx * y + x);
+        });
+
+        if (numsArr[0] == 0) {
+            return "0";
+        }
+        StringBuilder ret = new StringBuilder();
+        for (int num : numsArr) {
+            ret.append(num);
+        }
+        return ret.toString();
     }
 
     /**
