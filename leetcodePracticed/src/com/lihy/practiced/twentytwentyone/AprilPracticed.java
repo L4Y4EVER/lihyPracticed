@@ -1,5 +1,7 @@
 package com.lihy.practiced.twentytwentyone;
 
+import com.lihy.practiced.bean.TreeNode;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -13,6 +15,39 @@ public class AprilPracticed {
 
     public static void main(String[] args) {
         System.out.println(clumsy(10));;
+    }
+
+
+    int ans;
+    int pre;
+
+    /**
+     * 13 号问题
+     *
+     * @param root 头节点
+     * @return 最短距离
+     */
+    public int minDiffInBST(TreeNode root) {
+        ans = Integer.MAX_VALUE;
+        pre = -1;
+
+
+        return 0;
+    }
+
+    public void dfs(TreeNode root){
+        if (root == null){
+            return;
+        }
+        dfs(root.left);
+        if (pre == -1) {
+            pre = root.val;
+        } else {
+            ans = Math.min(ans, root.val - pre);
+            pre = root.val;
+        }
+        dfs(root.right);
+
     }
 
 
