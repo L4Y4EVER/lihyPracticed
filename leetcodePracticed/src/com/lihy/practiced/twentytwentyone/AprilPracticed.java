@@ -1,6 +1,7 @@
 package com.lihy.practiced.twentytwentyone;
 
 import com.lihy.practiced.bean.TreeNode;
+import sun.tools.jinfo.JInfo;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,6 +17,34 @@ public class AprilPracticed {
     public static void main(String[] args) {
         System.out.println(clumsy(10));;
     }
+
+    /**
+     * 17 号问题
+     *
+     * @param nums 数组
+     * @param k k
+     * @param t t
+     * @return 是否
+     */
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+        int n = nums.length;
+        TreeSet<Long> set = new TreeSet<Long>();
+        for (int i = 0; i < n; i++) {
+            Long ceiling = set.ceiling((long) nums[i] - (long) t);
+            if (ceiling != null && ceiling <= (long) nums[i] + (long) t) {
+                return true;
+            }
+            set.add((long) nums[i]);
+            if (i >= k) {
+                set.remove((long) nums[i - k]);
+            }
+        }
+        return false;
+
+    }
+
+
+
 
 
     int ans;
