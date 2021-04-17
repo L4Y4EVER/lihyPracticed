@@ -43,6 +43,29 @@ public class AprilPracticed {
 
     }
 
+    /**
+     * 16
+     *
+     * @param s1
+     * @param s2
+     * @return
+     */
+    public boolean isScramble(String s1, String s2) {
+        // todo
+        return false;
+    }
+
+    /**
+     * 15
+     *
+     * @param nums
+     * @return
+     */
+    public int rob(int[] nums) {
+        // todo
+        return 0;
+    }
+
 
 
 
