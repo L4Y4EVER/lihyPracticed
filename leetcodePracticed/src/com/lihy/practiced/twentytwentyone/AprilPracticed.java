@@ -24,7 +24,7 @@ public class AprilPracticed {
      * @param nums 数组
      * @return 结果
      */
-    public int removeDuplicates(int[] nums) {
+    public int removeDuplicatesDouble(int[] nums) {
         int i = 0;
 
         for (int j =1; j < nums.length; j ++ ){
